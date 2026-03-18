@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketing Automation Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="mesh"></div>
+    <main class="layout">
+      <section class="hero panel">
+        <p class="eyebrow">Marketing automation workspace</p>
+        <h1>Write once. Post locally. Review before anything goes live.</h1>
+        <p class="hero-copy">
+          Generate product-first launch copy, polish it for each channel, then post through official
+          APIs from a local dashboard. Reddit and X can be connected directly, while approval and
+          scheduling stay built in.
+        </p>
+        <div class="status-strip">
+          <span id="apiStatus" class="chip">Checking backend...</span>
+          <span id="draftState" class="chip chip-muted">No draft loaded</span>
+        </div>
+      </section>
+
+      <section class="panel form-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">1. Campaign brief</p>
+            <h2>Describe the product you actually want to market.</h2>
+          </div>
+          <button id="saveBtn" class="button button-ghost" type="button">Save draft</button>
+        </div>
+
+        <form id="campaignForm" class="campaign-form">
+          <label>
+            <span>Product name</span>
+            <input id="productName" name="productName" type="text" placeholder="GlobiBind" required />
+          </label>
+
+          <label>
+            <span>Target audience</span>
+            <input id="targetAudience" name="targetAudience" type="text" placeholder="music lovers with multiple streaming services" required />
+          </label>
+
+          <label class="field-wide">
+            <span>Description</span>
+            <textarea id="description" name="description" rows="6" placeholder="Describe the product itself, the problem it solves, and what makes it useful." required></textarea>
+          </label>
+
+          <label>
+            <span>Default tone</span>
+            <select id="tone" name="tone">
+              <option value="balanced">Balanced</option>
+              <option value="hype">Hype</option>
+              <option value="chill">Chill</option>
+              <option value="professional">Professional</option>
+            </select>
+          </label>
+
+          <div class="field-wide actions-row">
+            <button id="generateBtn" class="button button-primary" type="submit">Generate content</button>
+            <p class="helper-text">The generated copy now markets your product, not this dashboard.</p>
+          </div>
+        </form>
+      </section>
+
+      <section class="workspace-grid">
+        <section class="panel outputs-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">2. Content studio</p>
+              <h2>Edit and rewrite each output before posting.</h2>
+            </div>
+            <p class="helper-text">Use the tone buttons to rework the current draft without starting over.</p>
+          </div>
+
+          <div id="emptyState" class="empty-state">
+            Generate a draft to unlock the content studio.
+          </div>
+
+          <div id="contentGrid" class="content-grid hidden">
+            <article class="content-card">
+              <div class="card-top">
+                <div>
+                  <p class="card-label">Reddit</p>
+                  <h3>Community post</h3>
+                </div>
+                <button class="button button-small button-ghost" type="button" data-copy="reddit">Copy</button>
+              </div>
+              <div class="tone-row">
+                <button class="tone-button" type="button" data-tone-platform="reddit" data-tone="hype">Hype</button>
+                <button class="tone-button" type="button" data-tone-platform="reddit" data-tone="chill">Chill</button>
+                <button class="tone-button" type="button" data-tone-platform="reddit" data-tone="professional">Professional</button>
+              </div>
+              <textarea id="content-reddit" rows="16"></textarea>
+            </article>
+
+            <article class="content-card">
+              <div class="card-top">
+                <div>
+                  <p class="card-label">X / Twitter</p>
+                  <h3>Thread</h3>
+                </div>
+                <button class="button button-small button-ghost" type="button" data-copy="twitter">Copy</button>
+              </div>
+              <div class="tone-row">
+                <button class="tone-button" type="button" data-tone-platform="twitter" data-tone="hype">Hype</button>
+                <button class="tone-button" type="button" data-tone-platform="twitter" data-tone="chill">Chill</button>
+                <button class="tone-button" type="button" data-tone-platform="twitter" data-tone="professional">Professional</button>
+              </div>
+              <textarea id="content-twitter" rows="16"></textarea>
+            </article>
+
+            <article class="content-card">
+              <div class="card-top">
+                <div>
+                  <p class="card-label">Discord</p>
+                  <h3>Announcement</h3>
+                </div>
+                <button class="button button-small button-ghost" type="button" data-copy="discord">Copy</button>
+              </div>
+              <div class="tone-row">
+                <button class="tone-button" type="button" data-tone-platform="discord" data-tone="hype">Hype</button>
+                <button class="tone-button" type="button" data-tone-platform="discord" data-tone="chill">Chill</button>
+                <button class="tone-button" type="button" data-tone-platform="discord" data-tone="professional">Professional</button>
+              </div>
+              <textarea id="content-discord" rows="16"></textarea>
+            </article>
+
+            <article class="content-card">
+              <div class="card-top">
+                <div>
+                  <p class="card-label">SEO</p>
+                  <h3>Description</h3>
+                </div>
+                <button class="button button-small button-ghost" type="button" data-copy="seo">Copy</button>
+              </div>
+              <div class="tone-row">
+                <button class="tone-button" type="button" data-tone-platform="seo" data-tone="hype">Hype</button>
+                <button class="tone-button" type="button" data-tone-platform="seo" data-tone="chill">Chill</button>
+                <button class="tone-button" type="button" data-tone-platform="seo" data-tone="professional">Professional</button>
+              </div>
+              <textarea id="content-seo" rows="10"></textarea>
+            </article>
+          </div>
+        </section>
+
+        <aside class="panel sidebar-panel">
+          <div class="section-heading compact-heading">
+            <div>
+              <p class="eyebrow">3. Delivery</p>
+              <h2>Connect accounts and choose where to send it.</h2>
+            </div>
+          </div>
+
+          <div class="stack-block">
+            <p class="block-label">Connected accounts</p>
+            <div class="account-list">
+              <div class="account-card">
+                <div>
+                  <strong>Reddit</strong>
+                  <p id="redditConnection" class="helper-text">Not connected</p>
+                </div>
+                <button id="connectRedditBtn" class="button button-ghost" type="button">Connect Reddit</button>
+              </div>
+              <div class="account-card">
+                <div>
+                  <strong>X / Twitter</strong>
+                  <p id="twitterConnection" class="helper-text">Not connected</p>
+                </div>
+                <button id="connectTwitterBtn" class="button button-ghost" type="button">Connect X</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="stack-block">
+            <p class="block-label">Platforms to publish</p>
+            <label class="checkbox-row"><input type="checkbox" value="reddit" checked /> Reddit</label>
+            <label class="checkbox-row"><input type="checkbox" value="twitter" checked /> X / Twitter</label>
+            <label class="checkbox-row"><input type="checkbox" value="discord" /> Discord</label>
+            <p id="deliveryHint" class="helper-text"></p>
+          </div>
+
+          <label>
+            <span>Reddit subreddit</span>
+            <input id="redditSubreddit" type="text" placeholder="globibind" />
+          </label>
+
+          <label>
+            <span>Discord webhook URL</span>
+            <input id="discordWebhookUrl" type="url" placeholder="Only needed if you decide to post to Discord" />
+          </label>
+
+          <label>
+            <span>Schedule time</span>
+            <input id="scheduleAt" type="datetime-local" />
+          </label>
+
+          <label>
+            <span>Delay between platforms (ms)</span>
+            <input id="delayMs" type="number" min="0" step="500" value="2500" />
+          </label>
+
+          <label class="checkbox-row checkbox-emphasis">
+            <input id="manualApproval" type="checkbox" checked />
+            Require manual approval before posting
+          </label>
+
+          <div class="button-stack">
+            <button id="postBtn" class="button button-primary" type="button">Post / Schedule now</button>
+            <button id="requestApprovalBtn" class="button button-ghost" type="button">Request approval</button>
+            <button id="approveBtn" class="button button-secondary" type="button">Approve pending request</button>
+          </div>
+
+          <div id="flashMessage" class="flash-message"></div>
+
+          <div class="stack-block">
+            <p class="block-label">Recent jobs</p>
+            <ul id="jobsList" class="jobs-list">
+              <li class="job-empty">No jobs yet.</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

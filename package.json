@@ -1,0 +1,16 @@
+{
+  "name": "marketing-automation-tool",
+  "version": "1.0.0",
+  "description": "AI-powered marketing automation dashboard with manual approval and scheduling.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/server.js && node --check src/app.js && node --check src/routes/generateRoutes.js && node --check src/routes/draftRoutes.js && node --check src/services/contentService.js && node --check src/services/draftService.js && node --check src/services/postService.js && node --check src/services/schedulerService.js && node --check src/services/storageService.js && node --check src/providers/discordProvider.js && node --check src/providers/redditProvider.js && node --check src/providers/twitterProvider.js && node --check src/utils/validation.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
